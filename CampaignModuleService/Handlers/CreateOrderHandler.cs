@@ -4,7 +4,7 @@ using CampaignModule.Models;
 
 namespace CampaignModule.Handlers
 {
-    class CreateOrderHandler : CommandHandler
+    public class CreateOrderHandler : CommandHandler
     {
 
         public override string execute(List<string> parameters)

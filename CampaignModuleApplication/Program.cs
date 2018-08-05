@@ -2,7 +2,7 @@
 using CampaignModule.Context;
 using CampaignModule.Models;
 
-namespace CampaignModule
+namespace CampaignModuleApplication
 {
     class Program
     {

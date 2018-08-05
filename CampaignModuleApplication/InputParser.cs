@@ -5,7 +5,7 @@ using CampaignModule.Context;
 using CampaignModule.Handlers;
 using CampaignModule.Models;
 
-namespace CampaignModule
+namespace CampaignModuleApplication
 {
     class InputParser
     {
