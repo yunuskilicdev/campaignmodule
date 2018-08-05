@@ -10,10 +10,10 @@ namespace CampaignModule.Handlers
 
         public override string execute(List<string> parameters)
         {
-            if (parameters.Count != 2) { return "ERROR"; }
+            if (parameters.Count != 2) { return ErrorType.PARAMETER_IS_NOT_SUFFICIENT.ToString(); }
             CampaignContext campaignContext = new CampaignContext();
             Campaign campaign = campaignContext.getByName(parameters[1]);
-            if (campaign == null) return "ERROR";
+            if (campaign == null) return ErrorType.CAMPAIGN_NOT_FOUND.ToString();
             OrderContext orderContext = new OrderContext();
             List<Order> orders = orderContext.getOrdersByCampaign(campaign);
             string statusDesc = "";

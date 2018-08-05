@@ -9,7 +9,7 @@ namespace CampaignModule.Handlers
 
         public override string execute(List<string> parameters)
         {
-            if (parameters.Count != 6) { return "ERROR"; }
+            if (parameters.Count != 6) { return ErrorType.PARAMETER_IS_NOT_SUFFICIENT.ToString(); }
             try
             {
                 string name = parameters[1];
@@ -22,7 +22,7 @@ namespace CampaignModule.Handlers
                 bool result = context.add(campaign);
                 if (!result)
                 {
-                    return "ERROR";
+                    return ErrorType.CAMPAIGN_ALREADY_EXISTS.ToString();
                 }
                 else
                 {
@@ -32,7 +32,7 @@ namespace CampaignModule.Handlers
             }
             catch (System.Exception)
             {
-                return "ERROR";
+                return ErrorType.UNKNOWN_EXCEPTION.ToString();
             }
         }
     }

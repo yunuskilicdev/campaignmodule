@@ -9,7 +9,7 @@ namespace CampaignModule.Handlers
     {
         public override string execute(List<string> parameters)
         {
-            if (parameters.Count != 2) { return "ERROR"; }
+            if (parameters.Count != 2) { return ErrorType.PARAMETER_IS_NOT_SUFFICIENT.ToString();; }
             try
             {
                 string productCode = parameters[1];
@@ -17,7 +17,7 @@ namespace CampaignModule.Handlers
                 Product product = context.get(productCode);
                 if (product == null)
                 {
-                    return "ERROR";
+                    return ErrorType.PRODUCT_NOT_FOUND.ToString();
                 }
                 else
                 {
@@ -28,7 +28,7 @@ namespace CampaignModule.Handlers
             }
             catch (System.Exception)
             {
-                return "ERROR";
+                return ErrorType.UNKNOWN_EXCEPTION.ToString();
             }
         }
     }
