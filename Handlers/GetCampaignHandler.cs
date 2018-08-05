@@ -19,10 +19,11 @@ namespace CampaignModule.Handlers
             string statusDesc = "";
             if (campaign.GetActive() == true) statusDesc = "Not Ended";
             else statusDesc = "Ended";
-            double totalSales = orders.Sum(x=>x.Quantity);
-            double totalRevenue = orders.Sum(x=>x.Price*x.Quantity);
+            double totalSales = orders.Sum(x => x.Quantity);
+            double totalRevenue = orders.Sum(x => x.Price * x.Quantity);
             double averagePrice = totalRevenue / totalSales;
-            return $"Campaign {campaign.Name} info; Status {statusDesc}, Target Sales {campaign.TargetSalesCount},Total Sales {totalSales}, Turnover 9000, Average Item Price {averagePrice}";
+            double turnover = totalSales / campaign.TargetSalesCount;
+            return $"Campaign {campaign.Name} info; Status {statusDesc}, Target Sales {campaign.TargetSalesCount},Total Sales {totalSales}, Turnover {turnover}, Average Item Price {averagePrice}";
         }
     }
 }
