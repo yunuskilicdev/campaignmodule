@@ -21,26 +21,9 @@ namespace CampaignModule.Handlers
                 }
                 else
                 {
-                    double price = product.Price;
                     CampaignContext campaignContext = new CampaignContext();
-                    Campaign campaign = campaignContext.activeCampaign(productCode);
-                    if (campaign != null)
-                    {
-                        int currentTime = Time.getTime();
-                        int diff = currentTime - campaign.StartTime;
-                        double discountRate = campaign.PmLimit / campaign.Duration * diff;
-                        if (discountRate > 0)
-                        {
-                            if (discountRate > campaign.PmLimit)
-                            {
-                                discountRate = campaign.PmLimit;
-                            }
-                            price = (int)(price * (1 - discountRate / 100));
-                        }
-
-                    }
-
-                    return $"Product {product.ProductCode} info; price {price}, stock {product.GetStock()}";
+                    Tuple<double, Campaign> response = campaignContext.priceByProduct(product);
+                    return $"Product {product.ProductCode} info; price {response.Item1}, stock {product.GetStock()}";
                 }
             }
             catch (System.Exception)

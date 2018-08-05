@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using CampaignModule.Models;
 
 namespace CampaignModule.Context
@@ -20,6 +22,11 @@ namespace CampaignModule.Context
                 return true;
             }
             return false;
+        }
+
+        internal List<Order> getOrdersByCampaign(Campaign campaign)
+        {
+            return list().Where(x=>x.Campaign!=null&&x.Campaign.Name.Equals(campaign.Name)).ToList();
         }
     }
 }

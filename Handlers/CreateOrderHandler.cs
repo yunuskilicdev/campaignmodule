@@ -19,7 +19,11 @@ namespace CampaignModule.Handlers
                 if (product == null) { return "ERROR"; }
                 if (product.GetStock() < quantity) { return "ERROR"; }
                 product.decreaseStock(quantity);
-                productContext.update(product);
+                CampaignContext campaignContext = new CampaignContext();
+                var response = campaignContext.priceByProduct(product);
+                Order order = new Order(productCode,response.Item1,quantity,response.Item2);
+                OrderContext orderContext = new OrderContext();
+                orderContext.add(order);
                 return $"Order created; product {productCode}, quantity {quantity}";
             }
             catch (System.Exception)

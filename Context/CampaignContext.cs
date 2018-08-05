@@ -24,6 +24,11 @@ namespace CampaignModule.Context
             return false;
         }
 
+        internal Campaign getByName(string v)
+        {
+            return list().Where(x => x.Name.Equals(v)).SingleOrDefault();
+        }
+
         internal void DeactiveAll(List<Campaign> updateList)
         {
             foreach (var item in updateList)
@@ -48,9 +53,26 @@ namespace CampaignModule.Context
             return null;
         }
 
-        public Campaign activeCampaign(string productCode)
+        public Tuple<double, Campaign> priceByProduct(Product product)
         {
-           return list().Where(x => x.GetActive() == true && x.ProductCode.Equals(productCode)).SingleOrDefault();
+            double price = product.Price;
+            Campaign campaign = list().Where(x => x.GetActive() == true && x.ProductCode.Equals(product.ProductCode)).SingleOrDefault();
+            if (campaign != null)
+            {
+                int currentTime = Time.getTime();
+                int diff = currentTime - campaign.StartTime;
+                double discountRate = campaign.PmLimit / campaign.Duration * diff;
+                if (discountRate > 0)
+                {
+                    if (discountRate > campaign.PmLimit)
+                    {
+                        discountRate = campaign.PmLimit;
+                    }
+                    price = (int)(price * (1 - discountRate / 100));
+                }
+            }
+
+            return Tuple.Create(price, campaign);
         }
     }
 }

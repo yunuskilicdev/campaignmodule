@@ -8,8 +8,8 @@ namespace CampaignModule.Handlers
 
         public override string execute(List<string> parameters)
         {
-            Time.increaseTime(int.Parse(parameters[1]));
-            return "";
+            if (parameters.Count != 2) { return "ERROR"; }
+            return Time.increaseTime(int.Parse(parameters[1]));
         }
     }
 }
