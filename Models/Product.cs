@@ -1,48 +1,19 @@
+using System;
+
 namespace CampaignModule.Models
 {
     class Product
     {
-        private int _ıD;
-        private string _productCode;
-
-        public Product(string productCode, string price, string stock)
+        public Product(string productCode, double price, double stock)
         {
-            SetProductCode(productCode);
-            SetPrice(double.Parse(price));
-            SetStock(double.Parse(stock));
+            ProductCode = productCode;
+            Price = price;
+            this.stock = stock;
+            Id = Guid.NewGuid();
         }
 
-        public int GetID()
-        {
-            return _ıD;
-        }
-
-        public void SetID(int value)
-        {
-            _ıD = value;
-        }
-
-        public string GetProductCode()
-        {
-            return _productCode;
-        }
-
-        public void SetProductCode(string value)
-        {
-            _productCode = value;
-        }
-
-        private double price;
-
-        public double GetPrice()
-        {
-            return price;
-        }
-
-        public void SetPrice(double value)
-        {
-            price = value;
-        }
+        public string ProductCode { get; }
+        public double Price { get; }
 
         private double stock;
 
@@ -51,9 +22,14 @@ namespace CampaignModule.Models
             return stock;
         }
 
-        public void SetStock(double value)
-        {
-            stock = value;
+        private void SetStock(double value){
+            this.stock = value;
+        }
+
+        public Guid Id { get; }
+
+        public void decreaseStock(double value){
+            stock -= value;
         }
     }
 }

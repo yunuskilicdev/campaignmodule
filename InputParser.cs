@@ -47,7 +47,7 @@ namespace CampaignModule
             {
                 return null;
             }
-            commandHandler.executeCommand(list);
+            Console.WriteLine(commandHandler.execute(list));
             return null;
         }
     }

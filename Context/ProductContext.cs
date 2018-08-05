@@ -15,7 +15,7 @@ namespace CampaignModule.Context
 
         public bool add(Product product)
         {
-            if (!list().Contains(product))
+            if (list().Where(x => x.ProductCode.Equals(product.ProductCode)).Count() == 0)
             {
                 products.Add(product);
                 return true;
@@ -25,8 +25,17 @@ namespace CampaignModule.Context
 
         public Product get(string productCode)
         {
-            var filterResponse = list().Where(x => x.GetProductCode().Equals(productCode));
+            var filterResponse = list().Where(x => x.ProductCode.Equals(productCode));
             return filterResponse.Single();
+        }
+
+        public bool update(Product product)
+        {
+            Product existing = list().Where(x => x.ProductCode.Equals(product.ProductCode)).FirstOrDefault();
+            if (existing.Equals(default(Product))) { return false; }
+            list().Remove(existing);
+            products.Add(product);
+            return true;
         }
     }
 }
