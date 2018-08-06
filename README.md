@@ -1,6 +1,6 @@
 # Campaign Module
 
-Code sample for the campaign module with using .net core
+Code sample for the campaign module with using .net core. This project was written to learn .net core and test. 
 
 # Run
 
