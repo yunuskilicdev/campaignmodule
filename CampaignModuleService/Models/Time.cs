@@ -9,18 +9,18 @@ namespace CampaignModule.Models
     {
         private static int current = 0;
 
-        public static string increaseTime(int param)
+        public static string IncreaseTime(int param)
         {
             current += param;
             CampaignContext campaignContext = new CampaignContext();
-            List<Campaign> list = campaignContext.activeCampaign();
+            List<Campaign> list = campaignContext.ActiveCampaign();
 
             List<Campaign> updateList = list.Where(x => x.StartTime + x.Duration <= current).ToList();
             campaignContext.DeactiveAll(updateList);
             return $"Time is {current}:00";
         }
 
-        public static int getTime()
+        public static int GetTime()
         {
             return current;
         }

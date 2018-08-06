@@ -23,7 +23,7 @@ namespace CampaignModule.UnitTests.Services
             list.Add("P1");
             list.Add("100");
             list.Add("1000");
-            string response = _createProductHandler.execute(list);
+            string response = _createProductHandler.Execute(list);
             Console.WriteLine(response);
             Assert.AreEqual(response,"Product created; code P1, price 100, stock 1000");
         }
@@ -35,7 +35,7 @@ namespace CampaignModule.UnitTests.Services
             list.Add("create_product");
             list.Add("P1");
             list.Add("100");
-            string response = _createProductHandler.execute(list);
+            string response = _createProductHandler.Execute(list);
             Console.WriteLine(response);
             Assert.AreEqual(response,"PARAMETER_IS_NOT_SUFFICIENT");
         }

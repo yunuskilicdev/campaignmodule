@@ -5,10 +5,10 @@ namespace CampaignModule.Handlers
 {
     public class IncreaseTimeHandler : CommandHandler
     {
-        public override string execute(List<string> parameters)
+        public override string Execute(List<string> parameters)
         {
             if (parameters.Count != 2) { return ErrorType.PARAMETER_IS_NOT_SUFFICIENT.ToString(); }
-            return Time.increaseTime(int.Parse(parameters[1]));
+            return Time.IncreaseTime(int.Parse(parameters[1]));
         }
     }
 }

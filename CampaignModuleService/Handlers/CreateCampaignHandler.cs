@@ -7,7 +7,7 @@ namespace CampaignModule.Handlers
     public class CreateCampaignHandler : CommandHandler
     {
 
-        public override string execute(List<string> parameters)
+        public override string Execute(List<string> parameters)
         {
             if (parameters.Count != 6) { return ErrorType.PARAMETER_IS_NOT_SUFFICIENT.ToString(); }
             try
@@ -18,8 +18,8 @@ namespace CampaignModule.Handlers
                 int pmLimit = int.Parse(parameters[4]);
                 int targetSalesCount = int.Parse(parameters[5]);
                 CampaignContext context = new CampaignContext();
-                Campaign campaign = new Campaign(name, productCode, Time.getTime(), duration, pmLimit, targetSalesCount);
-                bool result = context.add(campaign);
+                Campaign campaign = new Campaign(name, productCode, Time.GetTime(), duration, pmLimit, targetSalesCount);
+                bool result = context.Add(campaign);
                 if (!result)
                 {
                     return ErrorType.CAMPAIGN_ALREADY_EXISTS.ToString();

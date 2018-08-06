@@ -39,7 +39,7 @@ namespace CampaignModule.Models
 
         public Guid Id { get; }
 
-        public void deactivate(){
+        public void Deactivate(){
             this.SetActive(false);
         }
     }

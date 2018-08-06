@@ -9,14 +9,14 @@ namespace CampaignModule.Context
     {
         private static List<Campaign> campaigns = new List<Campaign>();
 
-        public List<Campaign> list()
+        public List<Campaign> List()
         {
             return campaigns;
         }
 
-        public bool add(Campaign campaign)
+        public bool Add(Campaign campaign)
         {
-            if (list().Where(x => x.ProductCode.Equals(campaign.ProductCode) && x.GetActive() == true).Count() == 0)
+            if (List().Where(x => x.ProductCode.Equals(campaign.ProductCode) && x.GetActive() == true).Count() == 0)
             {
                 campaigns.Add(campaign);
                 return true;
@@ -24,9 +24,9 @@ namespace CampaignModule.Context
             return false;
         }
 
-        internal Campaign getByName(string v)
+        internal Campaign GetByName(string v)
         {
-            return list().Where(x => x.Name.Equals(v)).SingleOrDefault();
+            return List().Where(x => x.Name.Equals(v)).SingleOrDefault();
         }
 
         internal void DeactiveAll(List<Campaign> updateList)
@@ -34,14 +34,14 @@ namespace CampaignModule.Context
             foreach (var item in updateList)
             {
                 Campaign current = campaigns.Where(x => x.Id == item.Id).SingleOrDefault();
-                current.deactivate();
+                current.Deactivate();
             }
         }
 
 
-        public List<Campaign> activeCampaign()
+        public List<Campaign> ActiveCampaign()
         {
-            IEnumerable<Campaign> response = list().Where(x => x.GetActive() == true);
+            IEnumerable<Campaign> response = List().Where(x => x.GetActive() == true);
             if (response != null && response.Count() > 0)
             {
                 return response.ToList();
@@ -49,13 +49,13 @@ namespace CampaignModule.Context
             return null;
         }
 
-        public Tuple<double, Campaign> priceByProduct(Product product)
+        public Tuple<double, Campaign> PriceByProduct(Product product)
         {
             double price = product.Price;
-            Campaign campaign = list().Where(x => x.GetActive() == true && x.ProductCode.Equals(product.ProductCode)).SingleOrDefault();
+            Campaign campaign = List().Where(x => x.GetActive() == true && x.ProductCode.Equals(product.ProductCode)).SingleOrDefault();
             if (campaign != null)
             {
-                int currentTime = Time.getTime();
+                int currentTime = Time.GetTime();
                 int diff = currentTime - campaign.StartTime;
                 double discountRate = campaign.PmLimit / campaign.Duration * diff;
                 if (discountRate > 0)

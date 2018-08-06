@@ -6,7 +6,7 @@ namespace CampaignModule.Handlers
 {
     public class CreateProductHandler : CommandHandler
     {
-        public override string execute(List<string> parameters)
+        public override string Execute(List<string> parameters)
         {
             if (parameters.Count != 4) { return ErrorType.PARAMETER_IS_NOT_SUFFICIENT.ToString();; }
             try
@@ -16,7 +16,7 @@ namespace CampaignModule.Handlers
                 double stock = double.Parse(parameters[3]);
                 Product product = new Product(productCode, price, stock);
                 ProductContext context = new ProductContext();
-                bool result = context.add(product);
+                bool result = context.Add(product);
                 if (!result)
                 {
                     return ErrorType.PRODUCT_ALREADY_EXISTS.ToString();

@@ -8,14 +8,14 @@ namespace CampaignModule.Handlers
     public class GetCampaignHandler : CommandHandler
     {
 
-        public override string execute(List<string> parameters)
+        public override string Execute(List<string> parameters)
         {
             if (parameters.Count != 2) { return ErrorType.PARAMETER_IS_NOT_SUFFICIENT.ToString(); }
             CampaignContext campaignContext = new CampaignContext();
-            Campaign campaign = campaignContext.getByName(parameters[1]);
+            Campaign campaign = campaignContext.GetByName(parameters[1]);
             if (campaign == null) return ErrorType.CAMPAIGN_NOT_FOUND.ToString();
             OrderContext orderContext = new OrderContext();
-            List<Order> orders = orderContext.getOrdersByCampaign(campaign);
+            List<Order> orders = orderContext.GetOrdersByCampaign(campaign);
             string statusDesc = "";
             if (campaign.GetActive() == true) statusDesc = "Not Ended";
             else statusDesc = "Ended";

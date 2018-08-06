@@ -8,14 +8,14 @@ namespace CampaignModule.Context
     {
         private static List<Product> products = new List<Product>();
 
-        public List<Product> list()
+        public List<Product> List()
         {
             return products;
         }
 
-        public bool add(Product product)
+        public bool Add(Product product)
         {
-            if (list().Where(x => x.ProductCode.Equals(product.ProductCode)).Count() == 0)
+            if (List().Where(x => x.ProductCode.Equals(product.ProductCode)).Count() == 0)
             {
                 products.Add(product);
                 return true;
@@ -23,16 +23,16 @@ namespace CampaignModule.Context
             return false;
         }
 
-        public Product get(string productCode)
+        public Product Get(string productCode)
         {
-            return list().Where(x => x.ProductCode.Equals(productCode)).SingleOrDefault();
+            return List().Where(x => x.ProductCode.Equals(productCode)).SingleOrDefault();
         }
 
-        public bool update(Product product)
+        public bool Update(Product product)
         {
-            Product existing = list().Where(x => x.ProductCode.Equals(product.ProductCode)).FirstOrDefault();
+            Product existing = List().Where(x => x.ProductCode.Equals(product.ProductCode)).FirstOrDefault();
             if (existing.Equals(default(Product))) { return false; }
-            list().Remove(existing);
+            List().Remove(existing);
             products.Add(product);
             return true;
         }

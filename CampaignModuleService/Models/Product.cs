@@ -28,7 +28,7 @@ namespace CampaignModule.Models
 
         public Guid Id { get; }
 
-        public void decreaseStock(double value){
+        public void DecreaseStock(double value){
             stock -= value;
         }
     }

@@ -23,7 +23,7 @@ namespace CampaignModule.UnitTests.Services
             List<string> list = new List<string>();
             list.Add("get_product");
             list.Add("P1");
-            string response = _getProductHandler.execute(list);
+            string response = _getProductHandler.Execute(list);
             Assert.AreEqual(response,"Product P1 info; price 100, stock 1000");
         }
 
@@ -33,7 +33,7 @@ namespace CampaignModule.UnitTests.Services
             List<string> list = new List<string>();
             list.Add("get_product");
             list.Add("P2");
-            string response = _getProductHandler.execute(list);
+            string response = _getProductHandler.Execute(list);
             Assert.AreEqual(response,"PRODUCT_NOT_FOUND");
         }
     }

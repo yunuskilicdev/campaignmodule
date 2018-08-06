@@ -7,7 +7,7 @@ namespace CampaignModule.Handlers
     public class CreateOrderHandler : CommandHandler
     {
 
-        public override string execute(List<string> parameters)
+        public override string Execute(List<string> parameters)
         {
             if (parameters.Count != 3) { return ErrorType.PARAMETER_IS_NOT_SUFFICIENT.ToString(); }
             try
@@ -15,15 +15,15 @@ namespace CampaignModule.Handlers
                 string productCode = parameters[1];
                 double quantity = double.Parse(parameters[2]);
                 ProductContext productContext = new ProductContext();
-                Product product = productContext.get(productCode);
+                Product product = productContext.Get(productCode);
                 if (product == null) { return ErrorType.PRODUCT_NOT_FOUND.ToString(); }
                 if (product.GetStock() < quantity) { return ErrorType.PRODUCT_STOCK_IS_NOT_SUFFICIENT.ToString(); }
-                product.decreaseStock(quantity);
+                product.DecreaseStock(quantity);
                 CampaignContext campaignContext = new CampaignContext();
-                var response = campaignContext.priceByProduct(product);
+                var response = campaignContext.PriceByProduct(product);
                 Order order = new Order(productCode,response.Item1,quantity,response.Item2);
                 OrderContext orderContext = new OrderContext();
-                orderContext.add(order);
+                orderContext.Add(order);
                 return $"Order created; product {productCode}, quantity {quantity}";
             }
             catch (System.Exception)

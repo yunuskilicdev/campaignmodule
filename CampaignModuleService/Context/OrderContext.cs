@@ -9,14 +9,14 @@ namespace CampaignModule.Context
     {
         private static List<Order> orders = new List<Order>();
 
-        public List<Order> list()
+        public List<Order> List()
         {
             return orders;
         }
 
-        public bool add(Order order)
+        public bool Add(Order order)
         {
-            if (!list().Contains(order))
+            if (!List().Contains(order))
             {
                 orders.Add(order);
                 return true;
@@ -24,9 +24,9 @@ namespace CampaignModule.Context
             return false;
         }
 
-        internal List<Order> getOrdersByCampaign(Campaign campaign)
+        internal List<Order> GetOrdersByCampaign(Campaign campaign)
         {
-            return list().Where(x=>x.Campaign!=null&&x.Campaign.Name.Equals(campaign.Name)).ToList();
+            return List().Where(x=>x.Campaign!=null&&x.Campaign.Name.Equals(campaign.Name)).ToList();
         }
     }
 }

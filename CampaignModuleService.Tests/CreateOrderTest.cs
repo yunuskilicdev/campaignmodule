@@ -25,7 +25,7 @@ namespace CampaignModule.UnitTests.Services
             list.Add("create_order");
             list.Add("P2");
             list.Add("3");
-            string response = _createOrderHandler.execute(list);
+            string response = _createOrderHandler.Execute(list);
             Console.WriteLine(response);
             Assert.AreEqual(response, "PRODUCT_NOT_FOUND");
         }
@@ -36,7 +36,7 @@ namespace CampaignModule.UnitTests.Services
             List<string> list = new List<string>();
             list.Add("create_order");
             list.Add("P1");
-            string response = _createOrderHandler.execute(list);
+            string response = _createOrderHandler.Execute(list);
             Console.WriteLine(response);
             Assert.AreEqual(response, "PARAMETER_IS_NOT_SUFFICIENT");
         }
