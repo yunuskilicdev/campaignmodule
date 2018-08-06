@@ -38,10 +38,6 @@ namespace CampaignModule.Context
             }
         }
 
-        internal void UpdateAll(List<Campaign> updateList)
-        {
-
-        }
 
         public List<Campaign> activeCampaign()
         {
