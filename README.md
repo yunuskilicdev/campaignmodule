@@ -2,6 +2,12 @@
 
 Code sample for the campaign module with using .net core. This project was written to learn .net core and test. 
 
+#publish
+
+cd CampaignModuleApplication<br/>
+dotnet publish -c release -r win10-x64<br/>
+Exe location : CampaignModuleApplication\bin\release\netcoreapp2.1\win10-x64<br/>
+
 # Run
 
 cd CampaignModuleApplication<br/>
