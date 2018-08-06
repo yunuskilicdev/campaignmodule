@@ -2,7 +2,7 @@ using System;
 
 namespace CampaignModule.Models
 {
-    class Product
+    public class Product
     {
         public Product(string productCode, double price, double stock)
         {

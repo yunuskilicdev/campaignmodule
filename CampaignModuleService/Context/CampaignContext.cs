@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CampaignModule.CampaignStrategies;
 using CampaignModule.Models;
 
 namespace CampaignModule.Context
@@ -8,6 +9,8 @@ namespace CampaignModule.Context
     class CampaignContext
     {
         private static List<Campaign> campaigns = new List<Campaign>();
+
+        private ICampaignStrategy campaignStrategy;
 
         public List<Campaign> List()
         {
@@ -51,24 +54,8 @@ namespace CampaignModule.Context
 
         public Tuple<double, Campaign> PriceByProduct(Product product)
         {
-            double price = product.Price;
-            Campaign campaign = List().Where(x => x.GetActive() == true && x.ProductCode.Equals(product.ProductCode)).SingleOrDefault();
-            if (campaign != null)
-            {
-                int currentTime = Time.GetTime();
-                int diff = currentTime - campaign.StartTime;
-                double discountRate = campaign.PmLimit / campaign.Duration * diff;
-                if (discountRate > 0)
-                {
-                    if (discountRate > campaign.PmLimit)
-                    {
-                        discountRate = campaign.PmLimit;
-                    }
-                    price = (int)(price * (1 - discountRate / 100));
-                }
-            }
-
-            return Tuple.Create(price, campaign);
+            campaignStrategy = new LinearDiscountStrategy();
+            return campaignStrategy.PriceByProduct(product);
         }
     }
 }
