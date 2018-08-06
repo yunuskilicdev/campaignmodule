@@ -25,8 +25,7 @@ namespace CampaignModule.Context
 
         public Product get(string productCode)
         {
-            var filterResponse = list().Where(x => x.ProductCode.Equals(productCode));
-            return filterResponse.Single();
+            return list().Where(x => x.ProductCode.Equals(productCode)).SingleOrDefault();
         }
 
         public bool update(Product product)
